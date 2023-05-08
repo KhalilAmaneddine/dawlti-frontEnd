@@ -1,0 +1,41 @@
+<div class="container py-5">
+    <div class="text-center">
+        <h2>History of Submitted Civil Extracts</h2>
+    </div>
+    <div *ngFor="let instance of civilExtractData; index as i" class="p-5">
+        
+        <div>
+            <h4>Civil Extract {{i + 1}}:</h4>
+        </div>
+        <div class="">
+            <p><span class="h5">Governorate: </span>{{instance.governerate}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">District: </span>{{instance.district}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">First Name: </span>{{instance.fname}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Surname: </span>{{instance.surname}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Father's Name: </span>{{instance.fathersname}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Mother's Name: </span>{{instance.mothersname}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Place of Birth: </span>{{instance.pob}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Date of Birth: </span>{{instance.dob}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Sex: </span>{{instance.sex}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Martial Status: </span>{{instance.martialStatus}}</p>
+        </div>
+    </div>
+</div>

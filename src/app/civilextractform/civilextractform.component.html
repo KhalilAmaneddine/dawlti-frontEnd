@@ -1,0 +1,105 @@
+<div class="container p-5">
+    <div class="mb-5 pb-4">
+        <h5>Republic of Lebanon</h5>
+        <h5>Ministry of the Interior and Municipalities	</h5>
+        <h5>Directorate General of Civil Status</h5>
+        <h3>Individual Extract</h3>
+    </div>
+    
+    <div>
+        <form ngNativeValidate #civilExtractForm="ngForm" (ngSubmit)="onSubmit(civilExtractForm)">
+                <!-- <div>
+                    <p class="mb-2">Civil Extract Number:</p>
+                    <input type="text" name="number" id="number" required pattern="[0-9]+">
+                </div> -->
+                <div class="row">
+                    <div class="mt-5 col-sm-6">
+                        <p class="mb-2">Governorate:</p>
+                        <select name="governerate" [(ngModel)]="governerate" 
+                        (change)="generateDistricts()" required>
+                            <option value="{{governerate}}" *ngFor="let governerate of governerates">
+                                {{governerate}}
+                            </option>
+                        </select>  
+                    </div>    
+                    <div class="mt-5 col-sm-6">
+                        <p class="mb-2">District:</p>
+                        <select name="district" id="district" [(ngModel)]="district" required>
+                            <option value="{{district}}" *ngFor="let district of districts">
+                                {{district}}
+                            </option>
+                        </select>  
+                    </div>    
+                </div>
+
+                <div class="row">
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Name:</p>
+                        <input type="text" name="fname" id="fname" style="width:300px" 
+                         pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="fname" required>
+                    </div>
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Surname:</p>
+                        <input type="text" name="surname" id="surname" style="width:300px" 
+                        pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="surname" required>
+                    </div>
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Father's name:</p>
+                        <input type="text" name="fathersname" id="fathersname" style="width:300px" 
+                        pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="fathersname" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Mother's name:</p>
+                        <input type="text" name="mothersname" id="mothersname" style="width:300px" 
+                        pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="mothersname" required>
+                    </div>
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Place of Birth:</p>
+                        <input type="text" name="pob" id="pob" style="width:300px"
+                        pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="pob" required>
+                    </div>
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Date of Birth:</p>
+                        <input type="date" name="dob" id="dob" style="width:300px" [(ngModel)]="dob" 
+                        required>
+                    </div>
+                </div>
+                
+                
+                 <div class="mt-5 col-sm-4">
+                    <p class="mb-2">Sex:</p>
+                    <select name="sex" style="width: 300px;" [(ngModel)]="sex" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>    
+                </div>
+                
+                <div class="mt-5 col-sm-4">
+                    <p class="mb-2">Martial Status:</p>
+                    <select name="martialStatus" style="width: 300px;" [(ngModel)]="martialStatus" required>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                    </select>
+                </div>
+                
+                <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-around" style="width: 400px;">
+                        <button class="btn btn-danger" (click)="onExit()" type="button">Exit</button>
+                        <button class="btn btn-secondary" type="button" (click)="onPrint(civilExtractForm)">
+                            Print
+                        </button>
+                        <button class="btn btn-primary" (click)="onCancel(civilExtractForm)" type="button">
+                            Cancel
+                        </button>
+                        <button class="btn btn-primary" (click)="onSave(civilExtractForm)" type="button">
+                            Save
+                        </button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>   
+                </div>
+        </form>
+    </div>
+</div>

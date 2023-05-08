@@ -1,0 +1,16 @@
+input, select {
+    width:350px;
+    height:35px;
+    padding:5px 10px;
+    font-size: 16px;
+    border:1px solid grey;
+    border-radius: 5px;
+    color:grey;
+    margin-top: 0px;
+}
+
+@media print {
+    button {
+        display: none;
+    }
+}

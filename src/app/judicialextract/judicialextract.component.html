@@ -1,0 +1,114 @@
+
+<div class="container p-5">
+    <div class="mb-5 pb-5">
+        <h5>Republic of Lebanon</h5>
+        <h5>General Directorate of Interior Security Forces	</h5>
+        <h5>Command of Judiciary Police</h5>
+        <h3>Judicial Extract of Records</h3>
+    </div>
+    
+    <div>
+        <form #judicialForm="ngForm" ngNativeValidate (ngSubmit)="onSubmit(judicialForm)"> 
+                <!-- <div>
+                    <p class="mb-2">Judicial Extract Number:</p>
+                    <input type="text" name="number" id="number" ngModel>
+                </div> -->
+                <div class="row">
+                    <div class="mt-5 col-sm-6">
+                        <p class="mb-2">Governorate:</p>
+                        <select name="governerate" [(ngModel)]="governerate" 
+                        (change)="generateDistricts()" ngModel required>
+                            <option value="{{governerate}}" *ngFor="let governerate of governerates">
+                                {{governerate}}
+                            </option>
+                        </select>  
+                    </div>    
+                    <div class="mt-5 col-sm-6">
+                        <p class="mb-2">District:</p>
+                        <select name="district" id="district" [(ngModel)]="district" required>
+                            <option value="{{district}}" *ngFor="let district of districts">
+                                {{district}}
+                            </option>
+                        </select>  
+                    </div>    
+                </div>
+
+                <div class="row">
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Full Name:</p>
+                        <input type="text" name="fullName" id="fullName" style="width:300px" [(ngModel)]="fullName"
+                         required
+                        pattern="[a-zA-Z][a-zA-Z ]+">
+                    </div>
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Father's name:</p>
+                        <input type="text" name="fathersname" id="fathersname" style="width:300px" 
+                        [(ngModel)]="fathersname"
+                        required
+                        pattern="[a-zA-Z][a-zA-Z ]+">
+                    </div>
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Mother's name:</p>
+                        <input type="text" name="mothersname" id="mothersname" style="width:300px" 
+                        [(ngModel)]="mothersname" 
+                        required
+                        pattern="[a-zA-Z][a-zA-Z ]+">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Place of Birth:</p>
+                        <input type="text" name="pob" id="pob" style="width:300px" [(ngModel)]="pob" required
+                        pattern="[a-zA-Z][a-zA-Z ]+">
+                    </div>
+                    <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Date of Birth:</p>
+                        <input type="date" name="dob" id="dob" style="width:300px" [(ngModel)]="dob" required>
+                    </div>
+                </div>
+                
+                
+                 <div class="mt-5 col-sm-4">
+                    <p class="mb-2">Sex:</p>
+                    <select name="sex" style="width: 300px;" [(ngModel)]="sex" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>    
+                </div>
+                
+                <div class="row mt-5">
+                    <div class=" col-sm-4">
+                        <p class="mb-2">Convicted?</p>
+                        <select name="convicted" id="convicted" 
+                        [(ngModel)]="convicted" style="width: 300px;" required>
+                            <option value="Yes">Yes</option>
+                            <option value="No" selected>No</option>
+                        </select>
+                    </div>
+                    <div class="convictions col-sm-4" *ngIf="convicted == 'Yes'">
+                        <p class="mb-2">Conviction:</p>
+                        <select name="convictionType" id="convictionType" [(ngModel)]="convictionType" style="width: 300px;" required>
+                            <option value="Felony">Felony</option>
+                            <option value="Misdemeanor">Misdemeanor</option>
+                            <option value="Infraction">Infraction</option>
+                        </select>
+                    </div>
+                </div>
+                
+                
+                
+                <div class="d-flex justify-content-end mt-5">
+                    <div class="d-flex justify-content-around" style="width:400px;">
+                        <button class="btn btn-danger" type="button" (click)="onExit()">Exit</button>
+                        <button class="btn btn-secondary" type="button" (click)="onPrint(judicialForm)">
+                            Print
+                        </button>
+                        <button class="btn btn-primary" (click)="onCancel(judicialForm)" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="button" (click)="onSave(judicialForm)">Save</button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>   
+                </div>
+        </form>
+    </div>
+</div>

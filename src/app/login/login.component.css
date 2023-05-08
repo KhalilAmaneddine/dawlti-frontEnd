@@ -1,0 +1,13 @@
+p {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+input {
+    border-radius: 5px;
+    border:1px solid grey;
+    width: 400px;
+    height: 45px;
+    padding:5px 10px;
+    font-size: 18px;
+}

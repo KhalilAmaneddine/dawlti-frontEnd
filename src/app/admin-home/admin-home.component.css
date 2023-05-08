@@ -1,0 +1,27 @@
+input[type='search'] {
+    height:40px;
+    border: 1px solid grey;
+    border-radius: 2px;
+    padding: 5px 20px;
+}
+
+input:focus {
+    outline: none;
+}
+
+html,
+body,
+.intro {
+  height: 100%;
+}
+
+table td,
+table th {
+  min-width: 200px;
+  max-width: 200px;
+}
+
+tbody td {
+  font-weight: 500;
+  color: #999999;
+}

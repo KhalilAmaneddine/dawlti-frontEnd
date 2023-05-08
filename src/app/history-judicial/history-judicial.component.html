@@ -1,0 +1,41 @@
+<div class="container py-5">
+    <div class="text-center">
+        <h2>History of Submitted Judicial Extracts</h2>
+    </div>
+    <div *ngFor="let instance of judicialExtractData; index as i" class="p-5">
+        
+        <div>
+            <h4>Judicial Extract {{i + 1}}:</h4>
+        </div>
+        <div class=" mt-3">
+            <p><span class="h5">Governorate: </span>{{instance.governerate}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">District: </span>{{instance.district}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Name: </span>{{instance.fullName}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Father's Name: </span>{{instance.fathersname}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Mother's Name: </span>{{instance.mothersname}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Place of Birth: </span>{{instance.pob}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Date of Birth: </span>{{instance.dob}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Sex: </span>{{instance.sex}}</p>
+        </div>
+        <div class="">
+            <p><span class="h5">Convicted: </span>{{instance.convicted}}</p>
+        </div>
+        <div class="" *ngIf="instance.convicted == 'Yes'">
+            <p><span class="h5">Conviction Type: </span>{{instance.convictionType}}</p>
+        </div>
+    </div>
+</div>
