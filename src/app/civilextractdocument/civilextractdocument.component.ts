@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormSubmissionsService } from '../form-submissions.service';
 import { CivilDocument } from '../civil-document';
 import { Form } from '../form';
 import { User } from '../user';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { AttachmentsService } from '../attachments.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-civilextractdocument',
@@ -13,9 +15,21 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CivilextractdocumentComponent {
 
-  constructor(private service: FormSubmissionsService) {}
-
-  onSubmit(form: NgForm) {
-   
-  }
+  constructor(private http: HttpClient, private cookieService: CookieService,
+    private attachmentService: AttachmentsService) { }
+  
+    @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
+    submitForm(event: Event): void {
+      event.preventDefault();
+      const file: File = this.fileInput.nativeElement.files[0];
+    
+      this.attachmentService.uploadCivil(file).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          alert(error.message);
+        }
+      );
+    }
 }

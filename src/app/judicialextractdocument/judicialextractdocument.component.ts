@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { AttachmentsService } from '../attachments.service';
 
 @Component({
   selector: 'app-judicialextractdocument',
@@ -9,9 +10,24 @@ import { Observable } from 'rxjs';
   styleUrls: ['./judicialextractdocument.component.css']
 })
 export class JudicialextractdocumentComponent {
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private cookieService: CookieService,
+    private attachmentService: AttachmentsService) { }
   
-  private apiUrl: string = 'http://localhost:8090/api/v1/attachment';
+    @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
+    submitForm(event: Event): void {
+      event.preventDefault();
+      const file: File = this.fileInput.nativeElement.files[0];
+      // Choose the appropriate method based on the form type
+      this.attachmentService.uploadJudicial(file).subscribe(
+        response => {
+          console.log(response);
+          // Reset the form or perform any other necessary actions
+        },
+        error => {
+          alert(error.message);
+          // Handle error cases
+        }
+      );
+    }
 
-  
 }
