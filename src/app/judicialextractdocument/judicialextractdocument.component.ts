@@ -17,11 +17,9 @@ export class JudicialextractdocumentComponent {
     submitForm(event: Event): void {
       event.preventDefault();
       const file: File = this.fileInput.nativeElement.files[0];
-      // Choose the appropriate method based on the form type
       this.attachmentService.uploadJudicial(file).subscribe(
         response => {
           console.log(response);
-          // Reset the form or perform any other necessary actions
         },
         error => {
           alert(error.message);
