@@ -25,11 +25,16 @@ export class CivilextractdocumentComponent {
     
       this.attachmentService.uploadCivil(file).subscribe(
         response => {
-          console.log(response);
+          alert("Your document has been submitted");
+          location.href = 'Home';
         },
         error => {
           alert(error.message);
         }
       );
+    }
+
+    onExit() {
+      location.href = 'Home';
     }
 }

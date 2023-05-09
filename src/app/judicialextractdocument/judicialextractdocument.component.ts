@@ -19,13 +19,17 @@ export class JudicialextractdocumentComponent {
       const file: File = this.fileInput.nativeElement.files[0];
       this.attachmentService.uploadJudicial(file).subscribe(
         response => {
-          console.log(response);
+          alert("Your document has been submitted");
+          location.href = 'Home';
         },
         error => {
           alert(error.message);
-          // Handle error cases
         }
       );
+    }
+
+    onExit() {
+      location.href = 'Home';
     }
 
 }

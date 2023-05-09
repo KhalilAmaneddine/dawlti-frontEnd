@@ -43,6 +43,8 @@ export class HistroyCivilComponent implements OnInit{
     );
   }
 
-
+  onExit() {
+    location.href = 'Home';
+  }
 
 }

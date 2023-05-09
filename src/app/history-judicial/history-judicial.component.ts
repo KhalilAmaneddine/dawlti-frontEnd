@@ -44,4 +44,8 @@ export class HistoryJudicialComponent implements OnInit{
       }
     );
   }
+
+  onExit() {
+    location.href = 'Home';
+  }
 }
