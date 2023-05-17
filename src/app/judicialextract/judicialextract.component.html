@@ -1,114 +1,228 @@
-
-<div class="container p-5">
-    <div class="mb-5 pb-5">
-        <h5>Republic of Lebanon</h5>
-        <h5>General Directorate of Interior Security Forces	</h5>
-        <h5>Command of Judiciary Police</h5>
-        <h3>Judicial Extract of Records</h3>
-    </div>
+<div class="main">
+    <div class="container p-5">        
+        <div class="formContainer">
+            <form #judicialForm="ngForm" ngNativeValidate (ngSubmit)="onSubmit(judicialForm)"> 
+                    
+                        <!-- <div class="mt-5 col-sm-6">
+                            <p class="mb-2">Governorate:</p>
+                            <select name="governerate" [(ngModel)]="governerate" 
+                            (change)="generateDistricts()" ngModel required>
+                                <option value="{{governerate}}" *ngFor="let governerate of governerates">
+                                    {{governerate}}
+                                </option>
+                            </select>  
+                        </div>     -->
+                        <div class="text-center">
+                            <p class="mb-5 py-2" style="font-size: 30px;">Judicial Extract</p>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Governorate</mat-label>
+                                <mat-select name="governerate" [(ngModel)]="governerate" 
+                                (selectionChange)="generateDistricts(1)" required>
+                                    <mat-option value="{{governerate}}" *ngFor="let governerate of governerates">
+                                        {{governerate}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
     
-    <div>
-        <form #judicialForm="ngForm" ngNativeValidate (ngSubmit)="onSubmit(judicialForm)"> 
-                <!-- <div>
-                    <p class="mb-2">Judicial Extract Number:</p>
-                    <input type="text" name="number" id="number" ngModel>
-                </div> -->
-                <div class="row">
-                    <div class="mt-5 col-sm-6">
-                        <p class="mb-2">Governorate:</p>
-                        <select name="governerate" [(ngModel)]="governerate" 
-                        (change)="generateDistricts()" ngModel required>
-                            <option value="{{governerate}}" *ngFor="let governerate of governerates">
-                                {{governerate}}
-                            </option>
-                        </select>  
-                    </div>    
-                    <div class="mt-5 col-sm-6">
-                        <p class="mb-2">District:</p>
-                        <select name="district" id="district" [(ngModel)]="district" required>
-                            <option value="{{district}}" *ngFor="let district of districts">
-                                {{district}}
-                            </option>
-                        </select>  
-                    </div>    
-                </div>
-
-                <div class="row">
-                    <div class="mt-5 col-sm-4">
-                        <p class="mb-2">Full Name:</p>
-                        <input type="text" name="fullName" id="fullName" style="width:300px" [(ngModel)]="fullName"
-                         required
-                        pattern="[a-zA-Z][a-zA-Z ]+">
+                        <!-- <div class="mt-5 col-sm-6">
+                            <p class="mb-2">District:</p>
+                            <select name="district" id="district" [(ngModel)]="district" required>
+                                <option value="{{district}}" *ngFor="let district of districts">
+                                    {{district}}
+                                </option>
+                            </select>  
+                        </div>     -->
+                    
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>District</mat-label>
+                                <mat-select  name="district" id="district" [(ngModel)]="district" required>
+                                    <mat-option value="{{district}}" *ngFor="let district of districts">
+                                        {{district}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+    
+                    
+                        <!-- <div class="mt-5 col-sm-4">
+                            <p class="mb-2">Full Name:</p>
+                            <input type="text" name="fullName" id="fullName" style="width:300px" [(ngModel)]="fullName"
+                             required
+                            pattern="[a-zA-Z][a-zA-Z ]+">
+                        </div> -->
+    
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Full Name</mat-label>
+                                <input matInput type="text" name="fullName" id="fullName" [(ngModel)]="fullName"
+                                required
+                               pattern="[a-zA-Z][a-zA-Z ]+">
+                            </mat-form-field>
+                        </div>
+    
+    
+                        <!-- <div class="mt-5 col-sm-4">
+                            <p class="mb-2">Father's name:</p>
+                            <input type="text" name="fathersname" id="fathersname" style="width:300px" 
+                            [(ngModel)]="fathersname"
+                            required
+                            pattern="[a-zA-Z][a-zA-Z ]+">
+                        </div> -->
+    
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Father's Name</mat-label>
+                                <input matInput type="text" name="fathersname" id="fathersname" style="width:300px" 
+                                [(ngModel)]="fathersname"
+                                required
+                                pattern="[a-zA-Z][a-zA-Z ]+">
+                            </mat-form-field>
+                        </div>
+    
+    
+                        <!-- <div class="mt-5 col-sm-4">
+                            <p class="mb-2">Mother's name:</p>
+                            <input type="text" name="mothersname" id="mothersname" style="width:300px" 
+                            [(ngModel)]="mothersname" 
+                            required
+                            pattern="[a-zA-Z][a-zA-Z ]+">
+                        </div> -->
+                    
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Mother's Name</mat-label>
+                                <input matInput type="text" name="mothersname" id="mothersname" style="width:300px" 
+                                [(ngModel)]="mothersname" 
+                                required
+                                pattern="[a-zA-Z][a-zA-Z ]+">
+                            </mat-form-field>
+                        </div>
+    
+                        <div class="d-flex justify-content-between" style="width:600px">
+                            <mat-form-field style="width:280px" class="mb-3" appearance="outline">
+                                <mat-label>Place of Birth</mat-label>
+                                <input matInput type="text" name="pob" id="pob" [(ngModel)]="pob" required
+                                pattern="[a-zA-Z][a-zA-Z ]+">
+                            </mat-form-field>
+                            
+                            <mat-form-field style="width:280px" class="mb-3" appearance="outline">
+                                <mat-label>Date of Birth</mat-label>
+                                <input matInput [matDatepicker]="myDatePicker" name="dob" id="dob" style="width:300px" [(ngModel)]="dob" required>
+                                <mat-datepicker-toggle matSuffix [for]="myDatePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #myDatePicker></mat-datepicker>
+                              </mat-form-field>
+                               
+    
+                        </div>
+                    
+                        <!-- <div class="mt-5 col-sm-4">
+                            <p class="mb-2">Place of Birth:</p>
+                            <input type="text" name="pob" id="pob" style="width:300px" [(ngModel)]="pob" required
+                            pattern="[a-zA-Z][a-zA-Z ]+">
+                        </div>
+                        <div class="mt-5 col-sm-4">
+                            <p class="mb-2">Date of Birth:</p>
+                            <input type="date" name="dob" id="dob" style="width:300px" [(ngModel)]="dob" required>
+                        </div> -->
+                   
+                    
+                    
+                     <!-- <div class="mt-5 col-sm-4">
+                        <p class="mb-2">Sex:</p>
+                        <select name="sex" style="width: 300px;" [(ngModel)]="sex" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>    
+                    </div> -->
+                    
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Sex</mat-label>
+                            <mat-select name="sex" [(ngModel)]="sex" required>
+                                <mat-option value="Male">Male</mat-option>
+                                <mat-option value="Female">Female</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
-                    <div class="mt-5 col-sm-4">
-                        <p class="mb-2">Father's name:</p>
-                        <input type="text" name="fathersname" id="fathersname" style="width:300px" 
-                        [(ngModel)]="fathersname"
-                        required
-                        pattern="[a-zA-Z][a-zA-Z ]+">
+    
+                    
+                        <!-- <div class=" col-sm-4">
+                            <p class="mb-2">Convicted?</p>
+                            <select name="convicted" id="convicted" 
+                            [(ngModel)]="convicted" style="width: 300px;" required>
+                                <option value="Yes">Yes</option>
+                                <option value="No" selected>No</option>
+                            </select>
+                        </div> -->
+                        <div class="d-flex justify-content-between" style="width:600px">
+                            <div>
+                                <mat-form-field style="width:280px" class="mb-3" appearance="outline">
+                                    <mat-label>Convicted?</mat-label>
+                                    <mat-select name="convicted" id="convicted" 
+                                    [(ngModel)]="convicted" required>
+                                        <mat-option value="Yes">Yes</mat-option>
+                                        <mat-option value="No" selected>No</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div *ngIf="convicted == 'Yes'">
+                                <mat-form-field style="width:280px" class="mb-3" appearance="outline">
+                                    <mat-label>Conviction</mat-label>
+                                    <mat-select name="convictionType" id="convictionType" [(ngModel)]="convictionType" 
+                                    required>
+                                        <mat-option value="Felony">Felony</mat-option>
+                                        <mat-option value="Misdemeanor" selected>Misdemeanor</mat-option>
+                                        <mat-option value="Infraction" selected>Infraction</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            
+                            
+                        </div>
+    
+    
+                        <!-- <div class="convictions col-sm-4" *ngIf="convicted == 'Yes'">
+                            <p class="mb-2">Conviction:</p>
+                            <select name="convictionType" id="convictionType" [(ngModel)]="convictionType" style="width: 300px;" required>
+                                <option value="Felony">Felony</option>
+                                <option value="Misdemeanor">Misdemeanor</option>
+                                <option value="Infraction">Infraction</option>
+                            </select>
+                        </div> -->
+                    
+                    
+                    
+                    
+                    <div class="d-flex justify-content-end mt-5" style="width:600px">
+                        <div class="d-flex justify-content-around" style="width:450px;">
+                            <!-- <button class="btn btn-danger" type="button" (click)="onExit()">Exit</button> -->
+                            <button mat-raised-button (click)="onExit()" type="button" color="warn">Exit</button>
+                            <!-- <button class="btn btn-secondary" type="button" (click)="onPrint(judicialForm)">
+                                Print
+                            </button> -->
+                            <button mat-raised-button type="button" (click)="onPrint(judicialForm)"
+                            [disabled]="!judicialForm.form.valid">
+                                Print
+                            </button>
+    
+                            <!-- <button class="btn btn-primary" (click)="onCancel(judicialForm)" type="button">Cancel</button> -->
+                            <button mat-raised-button  (click)="onCancel(judicialForm)" type="button" color="accent">
+                                Cancel
+                            </button>
+                            <!-- <button class="btn btn-primary" type="button" (click)="onSave(judicialForm)"
+                            [disabled]="!judicialForm.form.valid">Save</button> -->
+                            <button mat-raised-button type="button" (click)="onSave(judicialForm)"
+                            [disabled]="!judicialForm.form.valid" color="primary">Save</button>
+    
+                            <!-- <button class="btn btn-primary" type="submit" [disabled]="!judicialForm.form.valid">Submit</button> -->
+                            <button mat-raised-button type="submit" color="primary" 
+                                [disabled]="!judicialForm.form.valid">Submit</button>
+                        </div>   
                     </div>
-                    <div class="mt-5 col-sm-4">
-                        <p class="mb-2">Mother's name:</p>
-                        <input type="text" name="mothersname" id="mothersname" style="width:300px" 
-                        [(ngModel)]="mothersname" 
-                        required
-                        pattern="[a-zA-Z][a-zA-Z ]+">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="mt-5 col-sm-4">
-                        <p class="mb-2">Place of Birth:</p>
-                        <input type="text" name="pob" id="pob" style="width:300px" [(ngModel)]="pob" required
-                        pattern="[a-zA-Z][a-zA-Z ]+">
-                    </div>
-                    <div class="mt-5 col-sm-4">
-                        <p class="mb-2">Date of Birth:</p>
-                        <input type="date" name="dob" id="dob" style="width:300px" [(ngModel)]="dob" required>
-                    </div>
-                </div>
-                
-                
-                 <div class="mt-5 col-sm-4">
-                    <p class="mb-2">Sex:</p>
-                    <select name="sex" style="width: 300px;" [(ngModel)]="sex" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>    
-                </div>
-                
-                <div class="row mt-5">
-                    <div class=" col-sm-4">
-                        <p class="mb-2">Convicted?</p>
-                        <select name="convicted" id="convicted" 
-                        [(ngModel)]="convicted" style="width: 300px;" required>
-                            <option value="Yes">Yes</option>
-                            <option value="No" selected>No</option>
-                        </select>
-                    </div>
-                    <div class="convictions col-sm-4" *ngIf="convicted == 'Yes'">
-                        <p class="mb-2">Conviction:</p>
-                        <select name="convictionType" id="convictionType" [(ngModel)]="convictionType" style="width: 300px;" required>
-                            <option value="Felony">Felony</option>
-                            <option value="Misdemeanor">Misdemeanor</option>
-                            <option value="Infraction">Infraction</option>
-                        </select>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="d-flex justify-content-end mt-5">
-                    <div class="d-flex justify-content-around" style="width:400px;">
-                        <button class="btn btn-danger" type="button" (click)="onExit()">Exit</button>
-                        <button class="btn btn-secondary" type="button" (click)="onPrint(judicialForm)">
-                            Print
-                        </button>
-                        <button class="btn btn-primary" (click)="onCancel(judicialForm)" type="button">Cancel</button>
-                        <button class="btn btn-primary" type="button" (click)="onSave(judicialForm)">Save</button>
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                    </div>   
-                </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-end p-5">
+<!-- <div class="d-flex justify-content-end p-5">
   <button class="btn btn-danger" (click)="logOut()">Log out</button>
 
 </div>
@@ -35,5 +35,23 @@
               </div>
             </div>
           </div>
-</div>
+</div> -->
 
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="civilSubMenu">Civil Extract</button>
+  <button mat-menu-item [matMenuTriggerFor]="judicialSubMenu">Judicial Extract</button>
+  <button mat-menu-item (click)="logOut()">Logout</button>
+</mat-menu>
+<button mat-flat-button [matMenuTriggerFor]="appMenu"><mat-icon>menu</mat-icon>Menu</button>
+
+<mat-menu #civilSubMenu="matMenu" >
+  <button mat-menu-item (click)="onFillEform('civilextractform')">Fill e-form</button>
+  <button mat-menu-item (click)="onUploadDocument('civilextractdocument')">Upload document</button>
+  <button mat-menu-item (click)="onViewHistory('historyCivil')">View history</button>
+</mat-menu>
+
+<mat-menu #judicialSubMenu="matMenu" >
+  <button mat-menu-item (click)="onFillEform('judicialextractform')">Fill e-form</button>
+  <button mat-menu-item (click)="onUploadDocument('judicialextractdocument')">Upload document</button>
+  <button mat-menu-item (click)="onViewHistory('historyJudicial')">View history</button>
+</mat-menu>

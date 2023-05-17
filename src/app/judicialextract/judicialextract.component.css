@@ -1,4 +1,4 @@
-input, select {
+/*input, select {
     width:350px;
     height:35px;
     padding:5px 10px;
@@ -7,10 +7,29 @@ input, select {
     border-radius: 5px;
     color:grey;
     margin-top: 0px;
-}
+}*/
 
 @media print {
     button {
         display: none;
     }
+}
+
+.formContainer {
+    padding: 40px;
+    width:700px;
+    margin: 0px auto;
+    background-color: #ffff;
+    border-radius: 5px;
+}
+
+.main {
+    /*background-color: #F2F2F2;*/
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+mat-form-field {
+    width: 600px;
+    margin-bottom: 20px;
 }

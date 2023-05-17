@@ -12,11 +12,13 @@ import { HistroyCivilComponent } from './histroy-civil/histroy-civil.component';
 import { HistoryJudicialComponent } from './history-judicial/history-judicial.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminGuardService } from './admin-guard.service';
+import { AdminViewDataComponent } from './admin-view-data/admin-view-data.component';
+import { RegisterLoginGuardService } from './register-login-guard.service';
 
 const routes: Routes = [
-  {path:'', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent},
+  {path:'', component: HomeComponent, canActivate: [RouteGuardService]},
+  {path: 'register', component: RegisterComponent, canActivate: [RegisterLoginGuardService]},
+  {path: 'login', component: LoginComponent, canActivate: [RegisterLoginGuardService]},
   {path: 'Home', component: HomeComponent, canActivate: [RouteGuardService]},
   {path: 'civilextractform', component: CivilextractformComponent, canActivate: [RouteGuardService]},
   {path: 'judicialextractform', component: JudicialextractComponent, canActivate: [RouteGuardService]},
@@ -24,7 +26,8 @@ const routes: Routes = [
   {path: 'judicialextractdocument', component: JudicialextractdocumentComponent, canActivate: [RouteGuardService]},
   {path: 'historyCivil', component: HistroyCivilComponent, canActivate: [RouteGuardService]},
   {path: 'historyJudicial', component: HistoryJudicialComponent, canActivate: [RouteGuardService]},
-  {path: 'adminHome', component: AdminHomeComponent, canActivate: [AdminGuardService]}
+  {path: 'adminHome', component: AdminHomeComponent, canActivate: [AdminGuardService]},
+  {path: 'viewData', component: AdminViewDataComponent, canActivate: [AdminGuardService]}
 
 ];
 

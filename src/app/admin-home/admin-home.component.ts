@@ -36,16 +36,7 @@ export class AdminHomeComponent implements OnInit{
     );
   }
 
-  onDelete(email: string) {
-    this.adminService.deleteUser(email).subscribe(
-      (response: void) => {
-        alert("User deleted");
-        this.getUsers();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    )
+  onViewForms() {
+    location.href = 'viewData';
   }
-
 }

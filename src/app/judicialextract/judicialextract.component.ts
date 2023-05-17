@@ -6,6 +6,9 @@ import { User } from '../user';
 import { FormSubmissionsService } from '../form-submissions.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { JudicialExtractData } from '../judicial-extract-data';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-judicialextract',
@@ -14,7 +17,8 @@ import { JudicialExtractData } from '../judicial-extract-data';
 })
 export class JudicialextractComponent implements OnInit{
 
-  constructor(private renderer: Renderer2, private formSubmissionService: FormSubmissionsService) {}
+  constructor(private renderer: Renderer2, private formSubmissionService: FormSubmissionsService,
+    public dialog: MatDialog, public snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.getSavedData();
@@ -48,7 +52,10 @@ export class JudicialextractComponent implements OnInit{
 
 
   districts: string[] = [];
- public generateDistricts() {
+ public generateDistricts(change: number) {
+  if(change == 1) {
+    this.district = '';
+  }
     switch(this.governerate) {
       case 'Akkar Governerate':
         this.districts = ['Akkar'];
@@ -91,15 +98,22 @@ export class JudicialextractComponent implements OnInit{
  
  
  onCancel(jForm: NgForm) {
-    jForm.reset();
+  let dialogRef = this.dialog.open(DialogComponent, {data: { content: "Are you sure you want to CLEAR the form?"}});
+  dialogRef.afterClosed().subscribe(result => { 
+    if(result == 'true') {
+      jForm.reset();
     this.formSubmissionService.deleteExtract(2).subscribe(
       (response: void) => {
         console.log(response);
+        this.snackBar.open("Form Resetted", "Dismiss", {duration: 2000});
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     )
+    }
+  });
+    
   }
 
   onExit() {
@@ -107,34 +121,47 @@ export class JudicialextractComponent implements OnInit{
    }
 
  onSave(form: NgForm) {
-    const formDataJsonString = JSON.stringify(form.value);
-    this.judicialExtract = new FormSubmission(formDataJsonString, 'PENDING', new Form(), 
-  new User());
-  this.formSubmissionService.saveExtract(this.judicialExtract,2).subscribe(
-    (response: FormSubmission) => {
-      console.log(response);
-      alert('Your Judicial Extract has been saved');
-    },
-    (error: HttpErrorResponse) => {
-      alert(error.message);
+  let dialogRef = this.dialog.open(DialogComponent, {data: { content: "Are you sure you want to SAVE the form?"}});
+  dialogRef.afterClosed().subscribe(result => { 
+    if(result == 'true') {
+      const formDataJsonString = JSON.stringify(form.value);
+      this.judicialExtract = new FormSubmission(formDataJsonString, 'PENDING', new Form(2, 'Judicial Extract of Records'), 
+    new User());
+    console.log(this.judicialExtract);
+    this.formSubmissionService.saveExtract(this.judicialExtract).subscribe(
+      (response: FormSubmission) => {
+        console.log(response);
+        this.snackBar.open("You Judicial Extract has been saved", "Dismiss", {duration: 2000});
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
     }
-  );
+  });
+   
  }
 
  onSubmit(form: NgForm) {
-  const formDataJsonString = JSON.stringify(form.value);
-  this.judicialExtract = new FormSubmission(formDataJsonString, 'SUBMITTED', new Form(), 
+  let dialogRef = this.dialog.open(DialogComponent, {data: { content: "Are you sure you want to SUBMIT the form?"}});
+  dialogRef.afterClosed().subscribe(result => { 
+    if(result == 'true') {
+      const formDataJsonString = JSON.stringify(form.value);
+  this.judicialExtract = new FormSubmission(formDataJsonString, 'SUBMITTED', new Form(2, 'Judicial Extract of Records'), 
   new User());
-  this.formSubmissionService.submitExtract(this.judicialExtract,2).subscribe(
+  this.formSubmissionService.submitExtract(this.judicialExtract).subscribe(
     (response: FormSubmission) => {
-      console.log(response);
-      alert("Your Judicial Extract has been submitted.")
-      location.href = 'Home';
+      this.snackBar.open("You Civil Extract has been submitted", "Dismiss", {duration: 2000});
+          form.resetForm();
     },
     (error: HttpErrorResponse) => {
       alert(error.message);
     }
   );
+    }
+  
+  });
+  
  }
   
  getSavedData() {
@@ -150,7 +177,7 @@ export class JudicialextractComponent implements OnInit{
       this.sex = response.sex;
       this.convicted = response.convicted;
       this.convictionType = response.convictionType;
-      this.generateDistricts();    
+      this.generateDistricts(0);    
       
     },
     (error: HttpErrorResponse) => {

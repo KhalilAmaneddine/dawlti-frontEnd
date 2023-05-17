@@ -15,16 +15,21 @@ export class FormSubmissionsService {
   
   private apiUrl: string = 'http://localhost:8090/api/v1/formsubmission';
 
-  public saveExtract(extract: FormSubmission, id: number): Observable<FormSubmission> {
+  public saveExtract(extract: FormSubmission): Observable<FormSubmission> {
     const token = this.cookieService.get('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<FormSubmission>(`${this.apiUrl}/save/${id}`, extract, {headers})
+    return this.http.post<FormSubmission>(`${this.apiUrl}/save`, extract, {headers})
   }
 
-  public submitExtract(extract: FormSubmission, id: number): Observable<FormSubmission> {
+  /*public submitExtract(extract: FormSubmission, id: number): Observable<FormSubmission> {
     const token = this.cookieService.get('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<FormSubmission>(`${this.apiUrl}/submit/${id}`, extract, {headers})
+  }*/
+  public submitExtract(extract: FormSubmission): Observable<FormSubmission> {
+    const token = this.cookieService.get('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<FormSubmission>(`${this.apiUrl}/submit`, extract, {headers})
   }
 
     public getCivilExtractData(id: number): Observable<CivilExtractData> {

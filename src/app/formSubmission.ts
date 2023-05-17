@@ -10,5 +10,7 @@ export class FormSubmission {
     constructor(formData: string, status: string, form: Form, user: User){
         this.formData = formData;
         this.status = status;
+        this.form = form;
+        this.user = user;
     };
 }

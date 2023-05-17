@@ -6,6 +6,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Form } from '../form';
 import { User } from '../user';
 import { CivilExtractData } from '../civil-extract-data';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-civilextractform',
@@ -14,7 +17,8 @@ import { CivilExtractData } from '../civil-extract-data';
 })
 export class CivilextractformComponent implements OnInit{
 
-  constructor(private formSubmissionService: FormSubmissionsService){}
+  constructor(private formSubmissionService: FormSubmissionsService, public dialog: MatDialog,
+    public snackBar: MatSnackBar){}
 
   ngOnInit(): void {
      this.getSavedData();
@@ -48,7 +52,10 @@ export class CivilextractformComponent implements OnInit{
 
   
 
- public generateDistricts() {
+ public generateDistricts(change: number) {
+  if(change == 1) {
+    this.district = '';
+  }
     switch(this.governerate) {
       case 'Akkar Governerate':
         this.districts = ['Akkar'];
@@ -93,15 +100,22 @@ export class CivilextractformComponent implements OnInit{
  }
 
  onCancel(form: NgForm) {
-  form.reset();
-  this.formSubmissionService.deleteExtract(1).subscribe(
-    (response: void) => {
-      console.log(response);
-    },
-    (error: HttpErrorResponse) => {
-      alert(error.message);
+  let dialogRef = this.dialog.open(DialogComponent, {data: { content: "Are you sure you want to CLEAR the form?"}});
+  dialogRef.afterClosed().subscribe(result => { 
+    if(result == 'true') {
+      form.reset();
+      this.formSubmissionService.deleteExtract(1).subscribe(
+        (response: void) => {
+          this.snackBar.open("Form Resetted", "Dismiss", {duration: 2000});
+          console.log(response);
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      )
     }
-  )
+  });
+  
  }
 
  onExit() {
@@ -109,34 +123,49 @@ export class CivilextractformComponent implements OnInit{
  }
 
  onSubmit(form: NgForm) {
-  const formDataJsonString = JSON.stringify(form.value);
-  this.civilExtract = new FormSubmission(formDataJsonString, 'SUBMITTED', new Form(), 
-  new User());
-  this.formSubmissionService.submitExtract(this.civilExtract,1).subscribe(
-    (response: FormSubmission) => {
-      console.log(response);
-      alert("Your Civil Extract has been submitted.")
-      location.href = 'Home';
-    },
-    (error: HttpErrorResponse) => {
-      alert(error.message);
-    }
-  );
+  let dialogRef = this.dialog.open(DialogComponent, {data: { content: "Are you sure you want to SUBMIT the form?"}});
+  dialogRef.afterClosed().subscribe(result => { 
+    if(result == 'true') {
+      const formDataJsonString = JSON.stringify(form.value);
+       this.civilExtract = new FormSubmission(formDataJsonString, 'SUBMITTED', new Form(1, 'Civil Extract'), 
+      new User());
+      this.formSubmissionService.submitExtract(this.civilExtract).subscribe(
+        (response: FormSubmission) => {
+          console.log(response);
+          this.snackBar.open("You Civil Extract has been submitted", "Dismiss", {duration: 2000});
+          form.resetForm();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+        }
+      });
+  
  }
 
  onSave(form: NgForm) {
-    const formDataJsonString = JSON.stringify(form.value);
-    this.civilExtract = new FormSubmission(formDataJsonString, 'PENDING', new Form(), 
-  new User());
-  this.formSubmissionService.saveExtract(this.civilExtract, 1).subscribe(
-    (response: FormSubmission) => {
-      console.log(response);
-      alert('Your Civil Extract has been saved');
-    },
-    (error: HttpErrorResponse) => {
-      alert(error.message);
+  
+  let dialogRef = this.dialog.open(DialogComponent, {data: { content: "Are you sure you want to SAVE the form?"}});
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'true') {
+      const formDataJsonString = JSON.stringify(form.value);
+      this.civilExtract = new FormSubmission(formDataJsonString, 'PENDING', new Form(1, 'Civil Extract'), 
+      new User());
+      this.formSubmissionService.saveExtract(this.civilExtract).subscribe(
+        (response: FormSubmission) => {
+          console.log(response);
+          //alert('Your Civil Extract has been saved');
+          this.snackBar.open("You Civil Extract has been saved", "Dismiss", {duration: 2000});
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
     }
-  );
+    
+  })
+  
 }
 
 
@@ -153,7 +182,7 @@ export class CivilextractformComponent implements OnInit{
       this.dob =  response.dob;
       this.sex = response.sex;
       this.martialStatus = response.martialStatus;
-      this.generateDistricts();    
+      this.generateDistricts(0);    
       
     },
     (error: HttpErrorResponse) => {
@@ -179,6 +208,5 @@ onPrint(form: NgForm) {
 }
 
  
-  
 }
 
