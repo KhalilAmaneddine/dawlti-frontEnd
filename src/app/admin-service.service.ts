@@ -20,10 +20,10 @@ export class AdminServiceService {
     return this.http.get<UserDTO[]>(`${this.apiUrl}/admin/getUsers`, {headers});
   }
 
-  public getForms(): Observable<FormSubmission[]> {
+  public getForms(id: number): Observable<FormSubmission[]> {
     const token = this.cookieService.get('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<FormSubmission[]>(`${this.apiUrl}/admin/getData`, {headers});
+    return this.http.get<FormSubmission[]>(`${this.apiUrl}/admin/getData/${id}`, {headers});
   }
 
   public approveForm(form: FormSubmission): Observable<string> {

@@ -15,10 +15,11 @@ import { RouteGuardService } from './route-guard.service';
 import { HistroyCivilComponent } from './histroy-civil/histroy-civil.component';
 import { HistoryJudicialComponent } from './history-judicial/history-judicial.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
-import { AdminViewDataComponent } from './admin-view-data/admin-view-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { DialogComponent } from './dialog/dialog.component';
+import { AdminViewCivilComponent } from './admin-view-civil/admin-view-civil.component';
+import { AdminViewJudicialComponent } from './admin-view-judicial/admin-view-judicial.component';
 
 
 
@@ -37,8 +38,9 @@ import { DialogComponent } from './dialog/dialog.component';
     HistroyCivilComponent,
     HistoryJudicialComponent,
     AdminHomeComponent,
-    AdminViewDataComponent,
     DialogComponent,
+    AdminViewCivilComponent,
+    AdminViewJudicialComponent,
     
     
   ],

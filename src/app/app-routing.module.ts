@@ -12,14 +12,15 @@ import { HistroyCivilComponent } from './histroy-civil/histroy-civil.component';
 import { HistoryJudicialComponent } from './history-judicial/history-judicial.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminGuardService } from './admin-guard.service';
-import { AdminViewDataComponent } from './admin-view-data/admin-view-data.component';
 import { RegisterLoginGuardService } from './register-login-guard.service';
+import { AdminViewCivilComponent } from './admin-view-civil/admin-view-civil.component';
+import { AdminViewJudicialComponent } from './admin-view-judicial/admin-view-judicial.component';
 
 const routes: Routes = [
-  {path:'', component: HomeComponent, canActivate: [RouteGuardService]},
+  {path: '', component: HistroyCivilComponent, canActivate: [RouteGuardService]},
   {path: 'register', component: RegisterComponent, canActivate: [RegisterLoginGuardService]},
   {path: 'login', component: LoginComponent, canActivate: [RegisterLoginGuardService]},
-  {path: 'Home', component: HomeComponent, canActivate: [RouteGuardService]},
+  {path: 'Home', component: HistroyCivilComponent, canActivate: [RouteGuardService]},
   {path: 'civilextractform', component: CivilextractformComponent, canActivate: [RouteGuardService]},
   {path: 'judicialextractform', component: JudicialextractComponent, canActivate: [RouteGuardService]},
   {path: 'civilextractdocument', component: CivilextractdocumentComponent, canActivate: [RouteGuardService]},
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path: 'historyCivil', component: HistroyCivilComponent, canActivate: [RouteGuardService]},
   {path: 'historyJudicial', component: HistoryJudicialComponent, canActivate: [RouteGuardService]},
   {path: 'adminHome', component: AdminHomeComponent, canActivate: [AdminGuardService]},
-  {path: 'viewData', component: AdminViewDataComponent, canActivate: [AdminGuardService]}
+  {path: 'adminViewCivil', component: AdminViewCivilComponent, canActivate: [AdminGuardService]},
+  {path: 'adminViewJudicial', component: AdminViewJudicialComponent, canActivate: [AdminGuardService]},
 
 ];
 

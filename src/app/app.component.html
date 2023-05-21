@@ -1,1 +1,75 @@
-    <router-outlet></router-outlet>
+<nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top bg-light" *ngIf="displayNav">
+    <div class="container"> 
+        <a href="Home" class="navbar-brand" style="word-break: break-all;">Dawlati Portal</a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navmenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="Home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Civil Extract
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
+                      <li><a class="dropdown-item" href="civilextractform">Fill e-form</a></li>
+                      <li><a class="dropdown-item" href="civilextractdocument">Upload Document</a></li>
+                      <li><a class="dropdown-item" href="historyCivil">View Histroy</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Judicial Extract
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
+                      <li><a class="dropdown-item" href="judicialextractform">Fill e-form</a></li>
+                      <li><a class="dropdown-item" href="judicialextractdocument">Upload Document</a></li>
+                      <li><a class="dropdown-item" href="historyJudicial">View History</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <!-- <a href="Home" class="nav-link btn btn-dark text-light" (click)="logOut()">Log Out</a> -->
+                    <button class="btn btn-dark nav-link text-light" (click)="logOut()">Log out</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top bg-light" *ngIf="displayAdminNav">
+    <div class="container"> 
+        <a href="adminHome" class="navbar-brand" style="word-break: break-all;">Dawlati Portal</a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navmenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="adminHome" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      View Forms
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-light">
+                      <li><a class="dropdown-item" href="adminViewCivil">Civil Extracts</a></li>
+                      <li><a class="dropdown-item" href="adminViewJudicial">Judicial Extracts</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <button class="btn btn-dark nav-link text-light" (click)="logOut()">Log out</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+
+<router-outlet></router-outlet>
+

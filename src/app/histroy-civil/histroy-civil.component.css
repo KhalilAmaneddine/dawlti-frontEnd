@@ -1,0 +1,15 @@
+.main {
+    min-height: 100%;
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+    padding-top: 100px;
+}
+
+
+.wrapper {
+        padding: 40px;
+        width:700px;
+        margin: 0px auto;
+        background-color: #ffff;
+        border-radius: 5px;
+}

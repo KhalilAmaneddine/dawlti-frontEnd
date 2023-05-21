@@ -1,0 +1,14 @@
+.main {
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+    height: 100vh;
+    padding-top: 100px;
+}
+
+.formContainer {
+    padding: 40px;
+    width:700px;
+    margin: 30px auto;
+    background-color: #ffff;
+    border-radius: 5px;
+}

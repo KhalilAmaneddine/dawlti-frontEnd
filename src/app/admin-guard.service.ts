@@ -16,7 +16,10 @@ export class AdminGuardService implements CanActivate{
       const decodedToken = jwt_decode<JwtBody>(token);
       if(decodedToken.authorities == 'ROLE_ADMIN')
       return true;
+      else{
+        return this.router.parseUrl('/Home');
+      }
     } 
-     return false;
+     return this.router.createUrlTree(['/login']);;
   }
 }

@@ -27,6 +27,7 @@
     /*background-color: #F2F2F2;*/
     --tw-bg-opacity: 1;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+    padding-top: 100px;
 }
 
 mat-form-field {

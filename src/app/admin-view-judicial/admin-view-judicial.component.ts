@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormSubmissionsService } from '../form-submissions.service';
+import { AdminServiceService } from '../admin-service.service';
 import { JudicialExtractData } from '../judicial-extract-data';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FormSubmission } from '../formSubmission';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-history-judicial',
-  templateUrl: './history-judicial.component.html',
-  styleUrls: ['./history-judicial.component.css']
+  selector: 'app-admin-view-judicial',
+  templateUrl: './admin-view-judicial.component.html',
+  styleUrls: ['./admin-view-judicial.component.css']
 })
-export class HistoryJudicialComponent implements OnInit{
+export class AdminViewJudicialComponent implements OnInit{
 
-  constructor(private service: FormSubmissionsService){}
+  constructor(private adminService: AdminServiceService){}
 
-  
   ngOnInit(): void {
-    this.getHistory();
+    this.getData();
   }
 
   judicialExtractData: JudicialExtractData[];
@@ -24,10 +23,11 @@ export class HistoryJudicialComponent implements OnInit{
 
   data: string[] = [];
 
-  getHistory() {
-    this.service.getHistory(2).subscribe(
+  getData() {
+    this.adminService.getForms(2).subscribe(
       (response: FormSubmission[]) => {
-          this.judicialExtracts = response;
+        
+        this.judicialExtracts = response;
           for(let i = 0; i < response.length; i++) {
             this.data[i] = response[i].formData;
           }
@@ -51,11 +51,18 @@ export class HistoryJudicialComponent implements OnInit{
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    );
+    )
   }
 
-  onEdit(id: number) {
-    location.href = `judicialextractform?id=${id}`;
+  onApprove(form: FormSubmission) {
+    this.adminService.approveForm(form).subscribe(
+      (response: string) => {
+        alert(response);
+        this.getData();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
   }
-
 }

@@ -9,6 +9,7 @@ import { JudicialExtractData } from '../judicial-extract-data';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogComponent } from '../dialog/dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-judicialextract',
@@ -18,13 +19,15 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class JudicialextractComponent implements OnInit{
 
   constructor(private renderer: Renderer2, private formSubmissionService: FormSubmissionsService,
-    public dialog: MatDialog, public snackBar: MatSnackBar) {}
+    public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router) {}
 
   ngOnInit(): void {
+    const urlParams = new URLSearchParams(window.location.search);
+    this.id = parseInt(urlParams.get('id'));
     this.getSavedData();
   }
   
-  
+  id: number;
   governerate: string = '';
   district: string;
   fullName: string;
@@ -125,7 +128,7 @@ export class JudicialextractComponent implements OnInit{
   dialogRef.afterClosed().subscribe(result => { 
     if(result == 'true') {
       const formDataJsonString = JSON.stringify(form.value);
-      this.judicialExtract = new FormSubmission(formDataJsonString, 'PENDING', new Form(2, 'Judicial Extract of Records'), 
+      this.judicialExtract = new FormSubmission(this.id, formDataJsonString, 'PENDING', new Form(2, 'Judicial Extract of Records'), 
     new User());
     console.log(this.judicialExtract);
     this.formSubmissionService.saveExtract(this.judicialExtract).subscribe(
@@ -147,12 +150,15 @@ export class JudicialextractComponent implements OnInit{
   dialogRef.afterClosed().subscribe(result => { 
     if(result == 'true') {
       const formDataJsonString = JSON.stringify(form.value);
-  this.judicialExtract = new FormSubmission(formDataJsonString, 'SUBMITTED', new Form(2, 'Judicial Extract of Records'), 
+  this.judicialExtract = new FormSubmission(this.id, formDataJsonString, 'SUBMITTED', new Form(2, 'Judicial Extract of Records'), 
   new User());
   this.formSubmissionService.submitExtract(this.judicialExtract).subscribe(
     (response: FormSubmission) => {
-      this.snackBar.open("You Civil Extract has been submitted", "Dismiss", {duration: 2000});
-          form.resetForm();
+      this.router.navigate(['historyJudicial']).then((navigated: boolean) => {
+        if(navigated) {
+          this.snackBar.open("You Civil Extract has been submitted", "Dismiss", {duration: 2000});
+        }
+    });
     },
     (error: HttpErrorResponse) => {
       alert(error.message);
@@ -165,7 +171,7 @@ export class JudicialextractComponent implements OnInit{
  }
   
  getSavedData() {
-  this.formSubmissionService.getJudicialExtractData(2).subscribe(
+  this.formSubmissionService.getJudicialExtractData(this.id).subscribe(
     (response: JudicialExtractData) => {
       this.governerate = response.governerate;
       this.district = response.district;

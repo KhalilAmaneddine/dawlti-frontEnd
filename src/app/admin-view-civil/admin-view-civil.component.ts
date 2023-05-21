@@ -1,33 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { FormSubmissionsService } from '../form-submissions.service';
-import { CivilExtractData } from '../civil-extract-data';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FormSubmission } from '../formSubmission';
-import { Router } from '@angular/router';
+import { AdminServiceService } from '../admin-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CivilExtractData } from '../civil-extract-data';
 
 @Component({
-  selector: 'app-histroy-civil',
-  templateUrl: './histroy-civil.component.html',
-  styleUrls: ['./histroy-civil.component.css']
+  selector: 'app-admin-view-civil',
+  templateUrl: './admin-view-civil.component.html',
+  styleUrls: ['./admin-view-civil.component.css']
 })
-export class HistroyCivilComponent implements OnInit{
-i: any;
+export class AdminViewCivilComponent implements OnInit{
 
-  constructor(private service: FormSubmissionsService, private router: Router){}
+  
+
+  constructor(private adminService: AdminServiceService){}
 
   ngOnInit(): void {
-    this.getHistory();
+    this.getData();
   }
+
+  civilExtracts: FormSubmission[];
 
   civilExtractData: CivilExtractData[];
 
   data: string[] = [];
-
-  civilExtracts: FormSubmission[];
   
-  getHistory() {
-
-    this.service.getHistory(1).subscribe(
+  getData() {
+    this.adminService.getForms(1).subscribe(
       (response: FormSubmission[]) => {
         
         this.civilExtracts = response;
@@ -53,13 +52,19 @@ i: any;
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    );
+    )
   }
-
-  onEdit(id: number) {
-    location.href = `civilextractform?id=${id}`;
-    
-  }
-
   
+  onApprove(form: FormSubmission) {
+    this.adminService.approveForm(form).subscribe(
+      (response: string) => {
+        alert(response);
+        this.getData();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
 }

@@ -21,11 +21,6 @@ export class FormSubmissionsService {
     return this.http.post<FormSubmission>(`${this.apiUrl}/save`, extract, {headers})
   }
 
-  /*public submitExtract(extract: FormSubmission, id: number): Observable<FormSubmission> {
-    const token = this.cookieService.get('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<FormSubmission>(`${this.apiUrl}/submit/${id}`, extract, {headers})
-  }*/
   public submitExtract(extract: FormSubmission): Observable<FormSubmission> {
     const token = this.cookieService.get('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -35,7 +30,14 @@ export class FormSubmissionsService {
     public getCivilExtractData(id: number): Observable<CivilExtractData> {
     const token = this.cookieService.get('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<CivilExtractData>(`${this.apiUrl}/getSavedData/${id}`,{headers});
+    return this.http.get<CivilExtractData>(`${this.apiUrl}/getSavedData/${id}`,
+    {headers});
+  } 
+ 
+  public getJudicialExtractData(id: number): Observable<JudicialExtractData> {
+    const token = this.cookieService.get('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<JudicialExtractData>(`${this.apiUrl}/getSavedData/${id}`,{headers});
   } 
 
   public deleteExtract(id: number): Observable<void> {
@@ -43,13 +45,6 @@ export class FormSubmissionsService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete<void>(`${this.apiUrl}/deleteExtract/${id}`,{headers});
   }
-
- 
-  public getJudicialExtractData(id: number): Observable<JudicialExtractData> {
-    const token = this.cookieService.get('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<JudicialExtractData>(`${this.apiUrl}/getSavedData/${id}`,{headers});
-  } 
    
   public formPrinted(form: string): Observable<void> {
     const token = this.cookieService.get('token');
@@ -57,10 +52,10 @@ export class FormSubmissionsService {
     return this.http.post<void>(`${this.apiUrl}/formPrinted`, form, {headers});
   }
 
-  public getHistory(id: number): Observable<string[]> {
+  public getHistory(id: number): Observable<FormSubmission[]> {
     const token = this.cookieService.get('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<string[]>(`${this.apiUrl}/history/${id}`, {headers});
+    return this.http.get<FormSubmission[]>(`${this.apiUrl}/history/${id}`, {headers});
   }
   
 }

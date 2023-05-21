@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminViewDataComponent } from './admin-view-data.component';
+import { AdminViewCivilComponent } from './admin-view-civil.component';
 
-describe('AdminViewDataComponent', () => {
-  let component: AdminViewDataComponent;
-  let fixture: ComponentFixture<AdminViewDataComponent>;
+describe('AdminViewCivilComponent', () => {
+  let component: AdminViewCivilComponent;
+  let fixture: ComponentFixture<AdminViewCivilComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminViewDataComponent ]
+      declarations: [ AdminViewCivilComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminViewDataComponent);
+    fixture = TestBed.createComponent(AdminViewCivilComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,6 +9,7 @@ import { CivilExtractData } from '../civil-extract-data';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-civilextractform',
@@ -18,12 +19,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CivilextractformComponent implements OnInit{
 
   constructor(private formSubmissionService: FormSubmissionsService, public dialog: MatDialog,
-    public snackBar: MatSnackBar){}
+    public snackBar: MatSnackBar, private router: Router, private activatedRoute: ActivatedRoute){}
 
   ngOnInit(): void {
+     const urlParams = new URLSearchParams(window.location.search);
+     this.id = parseInt(urlParams.get('id'));
      this.getSavedData();
+     
   }
-
+  id: number; 
   governerate: string = '';
   district: string;
   fname: string;
@@ -127,13 +131,16 @@ export class CivilextractformComponent implements OnInit{
   dialogRef.afterClosed().subscribe(result => { 
     if(result == 'true') {
       const formDataJsonString = JSON.stringify(form.value);
-       this.civilExtract = new FormSubmission(formDataJsonString, 'SUBMITTED', new Form(1, 'Civil Extract'), 
+       this.civilExtract = new FormSubmission(this.id, formDataJsonString, 'SUBMITTED', new Form(1, 'Civil Extract'), 
       new User());
       this.formSubmissionService.submitExtract(this.civilExtract).subscribe(
         (response: FormSubmission) => {
           console.log(response);
-          this.snackBar.open("You Civil Extract has been submitted", "Dismiss", {duration: 2000});
-          form.resetForm();
+          this.router.navigate(['Home']).then((navigated: boolean) => {
+            if(navigated) {
+              this.snackBar.open("You Civil Extract has been submitted", "Dismiss", {duration: 2000});
+            }
+        });
         },
         (error: HttpErrorResponse) => {
           alert(error.message);
@@ -150,12 +157,11 @@ export class CivilextractformComponent implements OnInit{
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'true') {
       const formDataJsonString = JSON.stringify(form.value);
-      this.civilExtract = new FormSubmission(formDataJsonString, 'PENDING', new Form(1, 'Civil Extract'), 
+      this.civilExtract = new FormSubmission(this.id, formDataJsonString, 'PENDING', new Form(1, 'Civil Extract'), 
       new User());
       this.formSubmissionService.saveExtract(this.civilExtract).subscribe(
         (response: FormSubmission) => {
           console.log(response);
-          //alert('Your Civil Extract has been saved');
           this.snackBar.open("You Civil Extract has been saved", "Dismiss", {duration: 2000});
         },
         (error: HttpErrorResponse) => {
@@ -170,7 +176,7 @@ export class CivilextractformComponent implements OnInit{
 
 
  getSavedData() {
-  this.formSubmissionService.getCivilExtractData(1).subscribe(
+  this.formSubmissionService.getCivilExtractData(this.id).subscribe(
     (response: CivilExtractData) => {
       this.governerate = response.governerate;
       this.district = response.district;

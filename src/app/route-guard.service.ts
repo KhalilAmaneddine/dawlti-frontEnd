@@ -17,6 +17,7 @@ export class RouteGuardService implements CanActivate{
       const decodedToken = jwt_decode<JwtBody>(token);
       if(decodedToken.authorities == 'ROLE_USER')
       return true;
+      else return this.router.parseUrl('/adminHome');
     } 
      return this.router.createUrlTree(['/login']);
   }

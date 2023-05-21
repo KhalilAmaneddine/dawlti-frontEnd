@@ -1,32 +1,29 @@
-<div class="main">
-    <div class="wrapper">
-        <div class="text-center">
-            <p class="h4">Your Judicial Extract History</p>
-        </div>
+<div class="p-5 m-3">
+    <div>
         <div class="civilExtract my-5 py-2" style="border-bottom: 1px solid black;"
-         *ngFor="let extract of judicialExtracts; index as i">
+         *ngFor="let extract of civilExtracts; index as i">
             <p class="h5">On {{extract.date}}:</p>
             <div class="px-3">
                 <p class="h6">Form ID: {{extract.id}}</p>
                 <p class="h6">Status: {{extract.status}}</p>
             </div>
-            <div class="px-4" *ngFor="let data of judicialExtractData; index as j">
+            <div class="px-4" *ngFor="let data of civilExtractData; index as j">
                 <div *ngIf="i==j">
                     <p><b>Governorate:</b> {{data.governerate}}</p>
                     <p><b>District:</b> {{data.district}}</p>
-                    <p><b>Name:</b> {{data.fullName}}</p>
+                    <p><b>Name:</b> {{data.fname}}</p>
+                    <p><b>Surname:</b> {{data.surname}}</p>
                     <p><b>Father's Name:</b> {{data.fathersname}}</p>
                     <p><b>Mother's Name:</b> {{data.mothersname}}</p>
                     <p><b>Place of Birth:</b> {{data.pob}}</p>
                     <p><b>Date of Birth:</b> {{data.dob}}</p>
                     <p><b>Sex:</b> {{data.sex}}</p>
-                    <p><b>Convicted:</b> {{data.convicted}}</p>
-                    <p *ngIf="data.convicted=='Yes'"><b>Conviction Type:</b> {{data.convictionType}}</p>
+                    <p><b>Martial Status:</b> {{data.martialStatus}}</p>
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button mat-raised-button color="primary" *ngIf="extract.status == 'PENDING'"
-                (click)="onEdit(extract.id)">Edit</button>
+                <button mat-raised-button color="primary"
+                (click)="onApprove(extract)">Approve</button>
             </div>
             
         </div>
