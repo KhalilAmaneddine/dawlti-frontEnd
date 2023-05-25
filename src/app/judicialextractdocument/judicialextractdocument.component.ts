@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
 import { AttachmentsService } from '../attachments.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-judicialextractdocument',
@@ -11,7 +12,8 @@ import { AttachmentsService } from '../attachments.service';
 })
 export class JudicialextractdocumentComponent {
   constructor(private http: HttpClient, private cookieService: CookieService,
-    private attachmentService: AttachmentsService) { }
+    private attachmentService: AttachmentsService,
+    public snackBar: MatSnackBar, private router: Router) { }
   
     @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
     submitForm(event: Event): void {
@@ -19,8 +21,11 @@ export class JudicialextractdocumentComponent {
       const file: File = this.fileInput.nativeElement.files[0];
       this.attachmentService.uploadJudicial(file).subscribe(
         response => {
-          alert("Your document has been submitted");
-          location.href = 'Home';
+          this.router.navigate(['Home']).then((navigated: boolean) => {
+            if(navigated) {
+              this.snackBar.open("You Judicial Extract Document has been submitted", "Dismiss", {duration: 4000});
+            }
+        });
         },
         error => {
           alert(error.message);

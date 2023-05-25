@@ -31,7 +31,18 @@ export class LoginComponent {
         else location.href = 'adminHome'
       },
       (error: HttpErrorResponse) => {
-        alert("Wrong credentials");
+        if(error.status === 401) {
+          const existingMessage = document.querySelector('.loginFailure');
+          if(!existingMessage) {
+            const p = document.createElement('p');
+            p.innerHTML = 'Wrong Email or Password...';
+            p.classList.add('loginFailure');
+            document.querySelector('.error-message').appendChild(p);
+          }
+        }
+        else {
+          alert("Server error. Please try again later" + error.message);
+        }
       }
   );
   }

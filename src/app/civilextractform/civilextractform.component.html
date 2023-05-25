@@ -2,20 +2,6 @@
     <div class="container p-5"> 
         <div class="formContainer">
             <form ngNativeValidate #civilExtractForm="ngForm" (ngSubmit)="onSubmit(civilExtractForm)">
-                    <!-- <div>
-                        <p class="mb-2">Civil Extract Number:</p>
-                        <input type="text" name="number" id="number" required pattern="[0-9]+">
-                    </div> -->
-                    
-                    <!--<div class="mt-5 col-sm-6">
-                            <p class="mb-2">Governorate:</p>
-                            <select name="governerate" [(ngModel)]="governerate" 
-                            (change)="generateDistricts()" required>
-                                <option value="{{governerate}}" *ngFor="let governerate of governerates">
-                                    {{governerate}}
-                                </option>
-                            </select>  
-                        </div>-->
                         <div class="text-center">
                             <p class="mb-5 py-2" style="font-size: 30px;">Individual Extract</p>
                         </div>
@@ -30,14 +16,6 @@
                             </mat-form-field>
                         </div>
                             
-                        <!--<div class="mt-5 col-sm-6">
-                            <p class="mb-2">District:</p>
-                            <select name="district" id="district" [(ngModel)]="district" required>
-                                <option value="{{district}}" *ngFor="let district of districts">
-                                    {{district}}
-                                </option>
-                            </select>  
-                        </div>-->
                         <div>
                             <mat-form-field appearance="outline">
                                 <mat-label>District</mat-label>
@@ -49,14 +27,6 @@
                             </mat-form-field>
                         </div>
                             
-                    
-    
-                    
-                        <!--<div class="mt-5 col-sm-4">
-                            <p class="mb-2">Name:</p>
-                            <input type="text" name="fname" id="fname" style="width:300px" 
-                             pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="fname" required>
-                        </div>-->
                         <div>
                             <mat-form-field appearance="outline">
                                 <mat-label>Name</mat-label>
@@ -64,11 +34,7 @@
                                 pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="fname" required>
                             </mat-form-field>
                         </div>
-                        <!--<div class="mt-5 col-sm-4">
-                            <p class="mb-2">Surname:</p>
-                            <input type="text" name="surname" id="surname" style="width:300px" 
-                            pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="surname" required>
-                        </div>-->
+                        
                         <div>
                             <mat-form-field appearance="outline">
                                 <mat-label>Surname</mat-label>
@@ -76,12 +42,6 @@
                                 pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="surname" required>
                             </mat-form-field>
                         </div>
-                        
-                        <!--<div class="mt-5 col-sm-4">
-                            <p class="mb-2">Father's name:</p>
-                            <input type="text" name="fathersname" id="fathersname" style="width:300px" 
-                            pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="fathersname" required>
-                        </div>-->
     
                         <div>
                             <mat-form-field appearance="outline">
@@ -91,13 +51,6 @@
                             </mat-form-field>
                         </div>
                     
-    
-                        <!--<div class="mt-5 col-sm-4">
-                            <p class="mb-2">Mother's name:</p>
-                            <input type="text" name="mothersname" id="mothersname" style="width:300px" 
-                            pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="mothersname" required>
-                        </div>-->
-    
                         <div>
                             <mat-form-field appearance="outline">
                                 <mat-label>Mother's name</mat-label>
@@ -105,14 +58,7 @@
                                 pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="mothersname" required>
                             </mat-form-field>
                         </div>
-                    
-    
-                        <!--<div class="mt-5 col-sm-4">
-                            <p class="mb-2">Place of Birth:</p>
-                            <input type="text" name="pob" id="pob" style="width:300px"
-                            pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="pob" required>
-                        </div>-->
-    
+
                         <div class="d-flex justify-content-between" style="width:600px">
                             <mat-form-field style="width:280px" class="mb-3" appearance="outline">
                                 <mat-label>Place of Birth</mat-label>
@@ -129,23 +75,6 @@
                                
     
                         </div>
-    
-                        <!-- <div class="mt-5 col-sm-4">
-                            <p class="mb-2">Date of Birth:</p>
-                            <input type="date" name="dob" id="dob" style="width:300px" [(ngModel)]="dob" 
-                            required>
-                        </div> -->
-                    
-                    
-                    
-                     <!--<div class="mt-5 col-sm-4">
-                        <p class="mb-2">Sex:</p>
-                        <select name="sex" style="width: 300px;" [(ngModel)]="sex" required>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>    
-                    </div>-->
-    
                     <div>
                         <mat-form-field appearance="outline">
                             <mat-label>Sex</mat-label>
@@ -163,42 +92,20 @@
                                 <mat-option value="Married">Married</mat-option>
                             </mat-select>
                         </mat-form-field>
-                    </div>
-                    
-                    <!--<div class="mt-5 col-sm-4">
-                        <p class="mb-2">Martial Status:</p>
-                        <select name="martialStatus" style="width: 300px;" [(ngModel)]="martialStatus" required>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                        </select>
-                    </div>-->
-                    
+                    </div>              
                     <div class="d-flex justify-content-end" style="width:600px">
                         <div class="d-flex justify-content-around" style="width: 450px;">
-                            <!-- <button class="btn btn-danger" (click)="onExit()" type="button">Exit</button> -->
                             <button mat-raised-button (click)="onExit()" type="button" color="warn">Exit</button>
-                            <!-- <button class="btn btn-secondary" type="button" (click)="onPrint(civilExtractForm)">
-                                Print
-                            </button> -->
                             <button mat-raised-button type="button" (click)="onPrint(civilExtractForm)"
                             [disabled]="!civilExtractForm.form.valid">
                                 Print
                             </button>
-                            <!-- <button class="btn btn-primary" (click)="onCancel(civilExtractForm)" type="button">
-                                Cancel
-                            </button> -->
                             <button mat-raised-button  (click)="onCancel(civilExtractForm)" type="button" color="accent">
                                 Cancel
                             </button>
-                            <!-- <button class="btn btn-primary" (click)="onSave(civilExtractForm)" type="button"
-                            [disabled]="!civilExtractForm.form.valid">
-                                Save
-                            </button> -->
                             <button mat-raised-button (click)="onSave(civilExtractForm)" type="button" 
                             color="primary" 
                             [disabled]="!civilExtractForm.form.valid">Save</button>
-                            <!-- <button class="btn btn-primary" type="submit" [disabled]="!civilExtractForm.form.valid">
-                                Submit</button> -->
                                 <button mat-raised-button type="submit" color="primary" 
                                 [disabled]="!civilExtractForm.form.valid">Submit</button>
                         </div>   

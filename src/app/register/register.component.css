@@ -11,3 +11,12 @@ input {
     padding:5px 10px;
     font-size: 18px;
 }
+
+mat-form-field {
+    width: 500px;
+    font-size: 18px;    
+}
+
+.error-message, .email-error {
+    color: red;
+}

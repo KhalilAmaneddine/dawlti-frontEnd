@@ -4,6 +4,9 @@ import { CivilExtractData } from '../civil-extract-data';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormSubmission } from '../formSubmission';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-histroy-civil',
@@ -13,7 +16,8 @@ import { Router } from '@angular/router';
 export class HistroyCivilComponent implements OnInit{
 i: any;
 
-  constructor(private service: FormSubmissionsService, private router: Router){}
+  constructor(private formSubmissionService: FormSubmissionsService, private router: Router,
+    public dialog: MatDialog, public snackBar: MatSnackBar){}
 
   ngOnInit(): void {
     this.getHistory();
@@ -27,7 +31,7 @@ i: any;
   
   getHistory() {
 
-    this.service.getHistory(1).subscribe(
+    this.formSubmissionService.getHistory(1).subscribe(
       (response: FormSubmission[]) => {
         
         this.civilExtracts = response;
@@ -59,6 +63,23 @@ i: any;
   onEdit(id: number) {
     location.href = `civilextractform?id=${id}`;
     
+  }
+
+  onDelete(id: number) {
+    let dialogRef = this.dialog.open(DialogComponent, {data: { content: "Are you sure you want to DELETE the draft?"}});
+  dialogRef.afterClosed().subscribe(result => { 
+    if(result == 'true') {
+      this.formSubmissionService.deleteExtract(id).subscribe(
+        (response: void) => {
+          this.snackBar.open("Your draft has been deleted", "Dismiss", {duration: 2000});
+          this.getHistory();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      )
+    }
+  });
   }
 
   

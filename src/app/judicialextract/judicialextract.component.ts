@@ -105,22 +105,15 @@ export class JudicialextractComponent implements OnInit{
   dialogRef.afterClosed().subscribe(result => { 
     if(result == 'true') {
       jForm.reset();
-    this.formSubmissionService.deleteExtract(2).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.snackBar.open("Form Resetted", "Dismiss", {duration: 2000});
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    )
+      this.snackBar.open("Form Resetted", "Dismiss", {duration: 2000});
+      
     }
   });
     
   }
 
   onExit() {
-    location.href = 'Home';
+    location.href = 'historyJudicial';
    }
 
  onSave(form: NgForm) {

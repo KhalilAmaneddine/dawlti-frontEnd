@@ -3,6 +3,9 @@ import { FormSubmissionsService } from '../form-submissions.service';
 import { JudicialExtractData } from '../judicial-extract-data';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormSubmission } from '../formSubmission';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-history-judicial',
@@ -11,7 +14,7 @@ import { FormSubmission } from '../formSubmission';
 })
 export class HistoryJudicialComponent implements OnInit{
 
-  constructor(private service: FormSubmissionsService){}
+  constructor(private formSubmissionService: FormSubmissionsService, public dialog: MatDialog, public snackBar: MatSnackBar){}
 
   
   ngOnInit(): void {
@@ -25,7 +28,7 @@ export class HistoryJudicialComponent implements OnInit{
   data: string[] = [];
 
   getHistory() {
-    this.service.getHistory(2).subscribe(
+    this.formSubmissionService.getHistory(2).subscribe(
       (response: FormSubmission[]) => {
           this.judicialExtracts = response;
           for(let i = 0; i < response.length; i++) {
@@ -56,6 +59,23 @@ export class HistoryJudicialComponent implements OnInit{
 
   onEdit(id: number) {
     location.href = `judicialextractform?id=${id}`;
+  }
+
+  onDelete(id: number) {
+    let dialogRef = this.dialog.open(DialogComponent, {data: { content: "Are you sure you want to DELETE the draft?"}});
+  dialogRef.afterClosed().subscribe(result => { 
+    if(result == 'true') {
+      this.formSubmissionService.deleteExtract(id).subscribe(
+        (response: void) => {
+          this.snackBar.open("Your draft has been deleted", "Dismiss", {duration: 2000});
+          this.getHistory();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      )
+    }
+  });
   }
 
 }

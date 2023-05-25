@@ -12,4 +12,5 @@
         margin: 0px auto;
         background-color: #ffff;
         border-radius: 5px;
+        min-height: 100vh;
 }

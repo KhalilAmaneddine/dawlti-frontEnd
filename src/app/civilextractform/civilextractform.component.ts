@@ -108,15 +108,7 @@ export class CivilextractformComponent implements OnInit{
   dialogRef.afterClosed().subscribe(result => { 
     if(result == 'true') {
       form.reset();
-      this.formSubmissionService.deleteExtract(1).subscribe(
-        (response: void) => {
-          this.snackBar.open("Form Resetted", "Dismiss", {duration: 2000});
-          console.log(response);
-        },
-        (error: HttpErrorResponse) => {
-          alert(error.message);
-        }
-      )
+      this.snackBar.open("Form Resetted", "Dismiss", {duration: 2000});
     }
   });
   

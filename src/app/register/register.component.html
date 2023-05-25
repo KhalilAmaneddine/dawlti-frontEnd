@@ -1,32 +1,64 @@
 <div class="p-5 d-flex justify-content-center">
     <div class="w-50 p-5 mainDiv" style="border:1px solid grey; border-radius: 10px;">
-        <div>
+        <div style="padding-bottom:30px;">
             <h2>Register</h2>
         </div>
         <form ngNativeValidate #registerForm="ngForm" (ngSubmit)="registration(registerForm.value)">
-            <div class="mt-5">
+            <div class="mb-3">
                 <p>First Name:</p>
-                <input type="text"  [(ngModel)]="firstname" name="firstname" id="firstname" placeholder="FirstName..."
-                 required pattern="[a-zA-Z][a-zA-Z ]+">
+                <mat-form-field appearance="outline">
+                    <mat-label>FirstName</mat-label>
+                    <input matInput type="text" name="firstname" id="firstname" [(ngModel)]="firstname"
+                     required pattern="[a-zA-Z][a-zA-Z ]+">
+                </mat-form-field>
             </div>
-            <div class="mt-5">
+
+
+
+            <div class="mb-3">
                 <p>Last Name:</p>
-                <input type="text" [(ngModel)]="lastname" name="lastname" id="lastname" placeholder="LastName..."
-                 required pattern="[a-zA-Z][a-zA-Z ]+">
+                <mat-form-field appearance="outline">
+                    <mat-label>LastName</mat-label>
+                    <input matInput type="text" name="lastname" id="lastname" [(ngModel)]="lastname"
+                     required pattern="[a-zA-Z][a-zA-Z ]+">
+                </mat-form-field>
             </div>
-            <div class="mt-5 emailDiv">
+
+
+            <div class="mb-3">
                 <p>Email:</p>
-                <input type="email" [(ngModel)]="email" name="email" id="email" placeholder="Email..." required
-                email>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" name="email" id="email" [(ngModel)]="email"
+                     required >
+                </mat-form-field>
+                <div class="email-error">
+                </div>
             </div>
-            <div class="mt-5">
+
+            <div class="mb-3">
                 <p>Password:</p>
-                <input type="password" [(ngModel)]="password" name="password" id="password" placeholder="Password..."
-                required minlength="6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" name="password" id="password" [(ngModel)]="password"
+                     required >
+                </mat-form-field>
             </div>
-            <div class=" d-flex justify-content-between align-items-center mt-4" style="width:400px">
+            <div>
+                <p>Confirm Password:</p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" name="confirmPassword" id="confirmPassword" 
+                    [(ngModel)]="confirmPassword" required >
+                </mat-form-field>
+            </div>
+            <div class="error-message">
+            </div>
+
+            <div class=" d-flex justify-content-between align-items-center mt-4" style="width:500px">
                 <p>Already have an account? <a href="login">Login here</a></p>
-                <button class="btn btn-primary" type="submit">Register</button>
+                <button class="btn btn-primary" type="submit"
+                [disabled]="!registerForm.form.valid">Register</button>
             </div>
         </form>
     </div>

@@ -3,15 +3,6 @@
         <div class="formContainer">
             <form #judicialForm="ngForm" ngNativeValidate (ngSubmit)="onSubmit(judicialForm)"> 
                     
-                        <!-- <div class="mt-5 col-sm-6">
-                            <p class="mb-2">Governorate:</p>
-                            <select name="governerate" [(ngModel)]="governerate" 
-                            (change)="generateDistricts()" ngModel required>
-                                <option value="{{governerate}}" *ngFor="let governerate of governerates">
-                                    {{governerate}}
-                                </option>
-                            </select>  
-                        </div>     -->
                         <div class="text-center">
                             <p class="mb-5 py-2" style="font-size: 30px;">Judicial Extract</p>
                         </div>
@@ -26,14 +17,7 @@
                             </mat-form-field>
                         </div>
     
-                        <!-- <div class="mt-5 col-sm-6">
-                            <p class="mb-2">District:</p>
-                            <select name="district" id="district" [(ngModel)]="district" required>
-                                <option value="{{district}}" *ngFor="let district of districts">
-                                    {{district}}
-                                </option>
-                            </select>  
-                        </div>     -->
+                       
                     
                         <div>
                             <mat-form-field appearance="outline">
@@ -47,12 +31,6 @@
                         </div>
     
                     
-                        <!-- <div class="mt-5 col-sm-4">
-                            <p class="mb-2">Full Name:</p>
-                            <input type="text" name="fullName" id="fullName" style="width:300px" [(ngModel)]="fullName"
-                             required
-                            pattern="[a-zA-Z][a-zA-Z ]+">
-                        </div> -->
     
                         <div>
                             <mat-form-field appearance="outline">
@@ -64,13 +42,6 @@
                         </div>
     
     
-                        <!-- <div class="mt-5 col-sm-4">
-                            <p class="mb-2">Father's name:</p>
-                            <input type="text" name="fathersname" id="fathersname" style="width:300px" 
-                            [(ngModel)]="fathersname"
-                            required
-                            pattern="[a-zA-Z][a-zA-Z ]+">
-                        </div> -->
     
                         <div>
                             <mat-form-field appearance="outline">
@@ -83,13 +54,7 @@
                         </div>
     
     
-                        <!-- <div class="mt-5 col-sm-4">
-                            <p class="mb-2">Mother's name:</p>
-                            <input type="text" name="mothersname" id="mothersname" style="width:300px" 
-                            [(ngModel)]="mothersname" 
-                            required
-                            pattern="[a-zA-Z][a-zA-Z ]+">
-                        </div> -->
+                       
                     
                         <div>
                             <mat-form-field appearance="outline">
@@ -118,25 +83,6 @@
     
                         </div>
                     
-                        <!-- <div class="mt-5 col-sm-4">
-                            <p class="mb-2">Place of Birth:</p>
-                            <input type="text" name="pob" id="pob" style="width:300px" [(ngModel)]="pob" required
-                            pattern="[a-zA-Z][a-zA-Z ]+">
-                        </div>
-                        <div class="mt-5 col-sm-4">
-                            <p class="mb-2">Date of Birth:</p>
-                            <input type="date" name="dob" id="dob" style="width:300px" [(ngModel)]="dob" required>
-                        </div> -->
-                   
-                    
-                    
-                     <!-- <div class="mt-5 col-sm-4">
-                        <p class="mb-2">Sex:</p>
-                        <select name="sex" style="width: 300px;" [(ngModel)]="sex" required>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>    
-                    </div> -->
                     
                     <div>
                         <mat-form-field appearance="outline">
@@ -148,15 +94,6 @@
                         </mat-form-field>
                     </div>
     
-                    
-                        <!-- <div class=" col-sm-4">
-                            <p class="mb-2">Convicted?</p>
-                            <select name="convicted" id="convicted" 
-                            [(ngModel)]="convicted" style="width: 300px;" required>
-                                <option value="Yes">Yes</option>
-                                <option value="No" selected>No</option>
-                            </select>
-                        </div> -->
                         <div class="d-flex justify-content-between" style="width:600px">
                             <div>
                                 <mat-form-field style="width:280px" class="mb-3" appearance="outline">
@@ -182,42 +119,22 @@
                             
                             
                         </div>
-    
-    
-                        <!-- <div class="convictions col-sm-4" *ngIf="convicted == 'Yes'">
-                            <p class="mb-2">Conviction:</p>
-                            <select name="convictionType" id="convictionType" [(ngModel)]="convictionType" style="width: 300px;" required>
-                                <option value="Felony">Felony</option>
-                                <option value="Misdemeanor">Misdemeanor</option>
-                                <option value="Infraction">Infraction</option>
-                            </select>
-                        </div> -->
-                    
-                    
-                    
                     
                     <div class="d-flex justify-content-end mt-5" style="width:600px">
                         <div class="d-flex justify-content-around" style="width:450px;">
-                            <!-- <button class="btn btn-danger" type="button" (click)="onExit()">Exit</button> -->
                             <button mat-raised-button (click)="onExit()" type="button" color="warn">Exit</button>
-                            <!-- <button class="btn btn-secondary" type="button" (click)="onPrint(judicialForm)">
-                                Print
-                            </button> -->
                             <button mat-raised-button type="button" (click)="onPrint(judicialForm)"
                             [disabled]="!judicialForm.form.valid">
                                 Print
                             </button>
     
-                            <!-- <button class="btn btn-primary" (click)="onCancel(judicialForm)" type="button">Cancel</button> -->
                             <button mat-raised-button  (click)="onCancel(judicialForm)" type="button" color="accent">
                                 Cancel
                             </button>
-                            <!-- <button class="btn btn-primary" type="button" (click)="onSave(judicialForm)"
-                            [disabled]="!judicialForm.form.valid">Save</button> -->
                             <button mat-raised-button type="button" (click)="onSave(judicialForm)"
                             [disabled]="!judicialForm.form.valid" color="primary">Save</button>
     
-                            <!-- <button class="btn btn-primary" type="submit" [disabled]="!judicialForm.form.valid">Submit</button> -->
+                            
                             <button mat-raised-button type="submit" color="primary" 
                                 [disabled]="!judicialForm.form.valid">Submit</button>
                         </div>   

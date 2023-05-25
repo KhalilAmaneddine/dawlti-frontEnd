@@ -1,12 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { FormSubmissionsService } from '../form-submissions.service';
-import { CivilDocument } from '../civil-document';
-import { Form } from '../form';
-import { User } from '../user';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AttachmentsService } from '../attachments.service';
 import { CookieService } from 'ngx-cookie-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-civilextractdocument',
@@ -16,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class CivilextractdocumentComponent {
 
   constructor(private http: HttpClient, private cookieService: CookieService,
-    private attachmentService: AttachmentsService) { }
+    private attachmentService: AttachmentsService, public snackBar: MatSnackBar, private router: Router) { }
   
     @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
     submitForm(event: Event): void {
@@ -25,8 +22,11 @@ export class CivilextractdocumentComponent {
     
       this.attachmentService.uploadCivil(file).subscribe(
         response => {
-          alert("Your document has been submitted");
-          location.href = 'Home';
+          this.router.navigate(['Home']).then((navigated: boolean) => {
+            if(navigated) {
+              this.snackBar.open("You Civil Extract Document has been submitted", "Dismiss", {duration: 4000});
+            }
+        });
         },
         error => {
           alert(error.message);
