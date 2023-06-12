@@ -32,7 +32,8 @@
                     <input matInput type="email" name="email" id="email" [(ngModel)]="email"
                      required >
                 </mat-form-field>
-                <div class="email-error">
+                <div *ngIf="displayEmailExistsError">
+                    <p style="color:red">An account with this email already exists</p>
                 </div>
             </div>
 
@@ -52,7 +53,8 @@
                     [(ngModel)]="confirmPassword" required >
                 </mat-form-field>
             </div>
-            <div class="error-message">
+            <div *ngIf="displayPasswordsError">
+                <p style="color:red">Passwords don't match</p>
             </div>
 
             <div class=" d-flex justify-content-between align-items-center mt-4" style="width:500px">

@@ -23,22 +23,15 @@ export class RegisterComponent implements OnInit{
   email: string;
   password: string;
   confirmPassword: string;
-
+  displayPasswordsError: boolean = false;
+  displayEmailExistsError: boolean = false;
 
   public registration(user: User) {
-    const existingPasswordMessage = document.querySelector('.registerFailure');
-    const existingEmailMessage = document.querySelector('.emailExists');
+    this.displayPasswordsError = false;
+    this.displayEmailExistsError = false;
     if(this.confirmPassword !== this.password) {
-      if( !existingPasswordMessage) {
-        const p = document.createElement('p');
-        p.innerHTML = 'Passwords do not match';
-        p.classList.add('registerFailure');
-        document.querySelector('.error-message').appendChild(p);
-      }
-      return;
-    }
-    if(existingPasswordMessage) {
-      document.querySelector('.registerFailure').remove();
+      this.displayPasswordsError = true;
+      return;  
     }
     this.service.register(user).subscribe(
       (respone: User) => {
@@ -52,12 +45,7 @@ export class RegisterComponent implements OnInit{
       },
       (error: HttpErrorResponse) => {
         if(error.status === 401) {
-          if(!existingEmailMessage) {
-            const p = document.createElement('p');
-            p.innerHTML = 'Email already exists';
-            p.classList.add('emailExists');
-            document.querySelector('.email-error').appendChild(p);
-          }
+          this.displayEmailExistsError = true;
         }else {
           alert("Server error, please try again later" + error.message);
         }

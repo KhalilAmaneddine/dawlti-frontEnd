@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogComponent } from '../dialog/dialog.component';
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'app-histroy-civil',
@@ -21,6 +22,7 @@ i: any;
 
   ngOnInit(): void {
     this.getHistory();
+   
   }
 
   civilExtractData: CivilExtractData[];
@@ -28,6 +30,7 @@ i: any;
   data: string[] = [];
 
   civilExtracts: FormSubmission[];
+
   
   getHistory() {
 

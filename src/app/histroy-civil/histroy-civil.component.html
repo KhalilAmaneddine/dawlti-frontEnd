@@ -1,48 +1,63 @@
-<div class="main">
-    <div class="wrapper">
-        <div class="text-center">
-            <p class="h4">Your Civil Extract History</p>
-        </div>
-        <div *ngIf="civilExtracts.length == 0"
+<div *ngIf="civilExtracts.length == 0"
         class="d-flex flex-row align-items-center justify-content-center h5"
         style="height:80vh">
             <p>
                 No History Available
             </p>
         </div>
-        <div class="civilExtract my-5 py-2" style="border-bottom: 1px solid black;"
-         *ngFor="let extract of civilExtracts; index as i">
-            <p class="h5">On {{extract.date}}:</p>
-            <div class="px-3">
-                <p class="h6">Status: 
-                    <span [ngStyle]="{color: extract.status == 'APPROVED'?'Green':'Black'}">
-                        {{extract.status}}
-                    </span>
-                </p>
+
+<section class="intro p-5" *ngIf="civilExtracts.length > 0">
+    <div class="bg-image py-5">
+      <div class="mask d-flex align-items-center">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="bg-white" style="position: relative;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Status</th>
+                      <th scope="col">Governorate</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Surname</th>
+                      <th scope="col">Date of Birth</th>
+                      
+                      <th scope="col">Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody *ngFor="let data of civilExtractData; index as i">
+                      <tr>
+                        <!-- <td>{{extract.status}}</td> -->
+                                <td [ngStyle]="{color: civilExtracts[i].status == 'APPROVED'?'Green':'Black'}">
+                                  {{civilExtracts[i].status}}
+                                </td>
+                                <td>{{data.governerate}}</td>
+                                
+                                <td>{{data.fname}}</td>
+                                <td>{{data.surname}}</td>
+                                <td>{{data.dob | date:'dd/MM/yyyy'}}</td>
+                                
+                                
+                                <td>
+                                  <div>
+                                    <button mat-raised-button color="warn" *ngIf="civilExtracts[i].status
+                                     == 'PENDING'"
+                                    class="mx-2" (click)="onDelete(civilExtracts[i].id)" style="font-size: 11px;">Delete</button>
+                                    
+                                    <button mat-raised-button color="primary" 
+                                    *ngIf="civilExtracts[i].status == 'PENDING'"
+                                    (click)="onEdit(civilExtracts[i].id)" style="font-size: 11px;">Edit</button>
+                                </div>
+                                </td>
+                      </tr>
+                </tbody>
+                </table>
+              </div>
             </div>
-            <div class="px-4" *ngFor="let data of civilExtractData; index as j">
-                <div *ngIf="i==j">
-                    <p><b>Governorate:</b> {{data.governerate}}</p>
-                    <p><b>District:</b> {{data.district}}</p>
-                    <p><b>Name:</b> {{data.fname}}</p>
-                    <p><b>Surname:</b> {{data.surname}}</p>
-                    <p><b>Father's Name:</b> {{data.fathersname}}</p>
-                    <p><b>Mother's Name:</b> {{data.mothersname}}</p>
-                    <p><b>Place of Birth:</b> {{data.pob}}</p>
-                    <p><b>Date of Birth:</b> {{data.dob}}</p>
-                    <p><b>Sex:</b> {{data.sex}}</p>
-                    <p><b>Martial Status:</b> {{data.martialStatus}}</p>
-                </div>
-            </div>
-            <div class="d-flex justify-content-end">
-                <button mat-raised-button color="warn" *ngIf="extract.status == 'PENDING'"
-                class="mx-2" (click)="onDelete(extract.id)">Delete</button>
-            
-                <button mat-raised-button color="primary" *ngIf="extract.status == 'PENDING'"
-                (click)="onEdit(extract.id)">Edit</button>
-            </div>
-            
+          </div>
         </div>
+      </div>
     </div>
-    
-</div>
+  </section>
+
+

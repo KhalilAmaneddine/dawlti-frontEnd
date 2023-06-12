@@ -1,4 +1,4 @@
-<div class="p-5 m-3">
+<!-- <div class="p-5 m-3">
     <div>
         <div class="civilExtract my-5 py-2" style="border-bottom: 1px solid black;"
          *ngFor="let extract of civilExtracts; index as i">
@@ -29,4 +29,60 @@
         </div>
     </div>
     
-</div>
+</div> -->
+
+<section class="intro p-5" *ngIf="civilExtracts.length > 0">
+    <div class="bg-image py-5">
+      <div class="mask d-flex align-items-center">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="table-responsive bg-white" style="position: relative;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Governorate</th>
+                      <th scope="col">District</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Surname</th>
+                      <th scope="col">Father's Name</th>
+                      <th scope="col">Mother's Name</th>
+                      <th scope="col">Place of Birth</th>
+                      <th scope="col">Date of Birth</th>
+                      <th scope="col">Sex</th>
+                      <th scope="col">Martial Status</th>
+                      <th scope="col">Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody *ngFor="let data of civilExtractData; index as i">
+                      <tr>
+                                <td>{{data.governerate}}</td>
+                                <td>{{data.district}}</td> 
+                                <td>{{data.fname}}</td>
+                                <td>{{data.surname}}</td>
+                                <td>{{data.fathersname}}</td>
+                                <td>{{data.mothersname}}</td>
+                                <td>{{data.pob}}</td>
+                                <td>{{data.dob | date:'dd/MM/yyyy'}}</td>
+                                <td>{{data.sex}}</td>
+                                <td>{{data.martialStatus}}</td>
+                                <td>
+                                    <button mat-raised-button color="primary" 
+                                    (click)="onApprove(civilExtracts[i])" style="font-size: 11px;">
+                                    Approve</button>
+                                </td>
+                      </tr>
+                </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
